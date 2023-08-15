@@ -11,6 +11,11 @@ class IngredientReceipt extends Model
 
     public $table = 'ingredient_receipt';
 
+    protected $primaryKey = [
+        'ingredient_id',
+        'receipt_id',
+    ];
+
     public $fillable = [
         'quantity',
     ];
