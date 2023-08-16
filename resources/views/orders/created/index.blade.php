@@ -40,7 +40,7 @@
                                         {{ $order['state']['name'] }}
                                     </th>
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                        <form action="{{ route('order.prepare', ['id' => $order['id']]) }}" method="POST">
+                                        <form action="{{ route('created_orders.prepare', ['id' => $order['id']]) }}" method="POST">
                                             @csrf
                                             @method('PATCH')
                                             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
