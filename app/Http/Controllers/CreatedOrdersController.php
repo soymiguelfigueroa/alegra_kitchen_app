@@ -37,10 +37,10 @@ class CreatedOrdersController extends Controller
         ]);
 
         if ($response->ok()) {
-            return redirect(route('created.index'))->with('success', 'Order updated');
+            return redirect(route('created_orders.index'))->with('success', 'Order updated');
         }
 
-        return redirect(route('created.index'))->with('error', 'Error updating created');
+        return redirect(route('created_orders.index'))->with('error', 'Error updating created');
     }
 
     public function getUndeliveredIngredients(): Collection
