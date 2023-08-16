@@ -9,6 +9,8 @@ class OrderReceipt extends Model
 {
     use HasFactory;
 
+    public $table = 'order_receipt';
+
     protected $primaryKey = [
         'order_id',
         'receipt_id',

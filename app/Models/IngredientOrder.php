@@ -9,6 +9,8 @@ class IngredientOrder extends Model
 {
     use HasFactory;
 
+    public $table = 'ingredient_order';
+
     protected $primaryKey = [
         'ingredient_id',
         'order_id',
