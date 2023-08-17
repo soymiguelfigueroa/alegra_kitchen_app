@@ -22,6 +22,12 @@
                         {{ __('Created orders') }}
                     </x-nav-link>
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('processing_orders.index')" :active="request()->routeIs('processing_orders.index')">
+                        {{ __('Processing orders') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
