@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @method static find($id)
+ * @property mixed $id
  */
 class Receipt extends Model
 {
