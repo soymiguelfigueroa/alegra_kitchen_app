@@ -41,8 +41,10 @@ class ReceiptsController extends Controller
     {
         $receipt_id = $request->receipt_id;
 
+        $receipt = Receipt::find($receipt_id);
+
         $ingredients_receipt = DB::table('ingredient_receipt')
-            ->where('receipt_id', $receipt_id)
+            ->where('receipt_id', $receipt->id)
             ->get()
             ->toArray();
 
@@ -50,6 +52,11 @@ class ReceiptsController extends Controller
             'ingredients_receipt' => $ingredients_receipt
         ]);
 
-        return $response->json(); // Ingredients
+        $ingredients_receipt = $response->json(); // Ingredients
+
+        return response()->json([
+            'receipt' => $receipt,
+            'ingredients_receipt' => $ingredients_receipt,
+        ]);
     }
 }

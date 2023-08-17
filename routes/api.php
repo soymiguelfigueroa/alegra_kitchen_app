@@ -26,4 +26,5 @@ Route::get('/ingredients/delivered', [CreatedOrdersController::class, 'getDelive
 Route::patch('/ingredients/deliver', [CreatedOrdersController::class, 'deliverIngredients']);
 
 Route::get('/receipts', [ReceiptsController::class, 'getReceipts']);
+Route::get('/receipt', [ReceiptsController::class, 'getReceipt']);
 Route::get('/ingredients', [ReceiptsController::class, 'getIngredients']);
