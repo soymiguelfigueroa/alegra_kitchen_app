@@ -11,7 +11,7 @@ class DeliveredOrdersController extends Controller
     {
         $response = Http::get(env('API_BENEFICIARY_ENDPOINT') . 'orders/delivered');
 
-        $orders = $this->getOrdersData($response);
+        $orders = $this->getOrdersData($response, true);
 
         return view('orders.delivered.index', compact('orders'));
     }

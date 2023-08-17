@@ -26,6 +26,12 @@
                                     </th>
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                         {{ $order['receipt']->name }}
+                                        <span class="block">Ingredients:</span>
+                                        <ul class="list-disc">
+                                            @foreach($order['ingredients'] as $ingredient)
+                                                <li>{{ sprintf(__("%s (%s Units)"), $ingredient['name'], $ingredient['quantity']) }}</li>
+                                            @endforeach
+                                        </ul>
                                     </th>
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                         <form action="{{ route('processing_orders.complete', ['order_id' => $order['id']]) }}" method="POST">

@@ -12,7 +12,7 @@ class ProcessingOrdersController extends Controller
     {
         $response = Http::get(env('API_BENEFICIARY_ENDPOINT') . 'orders/pending');
 
-        $orders = $this->getOrdersData($response);
+        $orders = $this->getOrdersData($response, false);
 
         return view('orders.processing.index', compact('orders'));
     }
