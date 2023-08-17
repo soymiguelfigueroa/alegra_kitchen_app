@@ -16,14 +16,15 @@ class Controller extends BaseController
     protected function getOrdersData($response, $processed)
     {
         $orders = $response->json()['data'];
-        foreach ($orders as &$order) {
+        foreach ($orders as $key => &$order) {
+            // Get only order receipts not completed
             $orders_receipts = DB::table('order_receipt')
                 ->where('completed', $processed)
                 ->where('order_id', $order['id'])
                 ->get()
                 ->toArray();
             if (count($orders_receipts) <= 0) {
-                unset($order);
+                unset($orders[$key]);
             } else {
                 $receipt = Receipt::find($orders_receipts[0]->receipt_id);
                 $order['receipt'] = $receipt;
@@ -31,9 +32,17 @@ class Controller extends BaseController
                     ->where('order_id', $order['id'])
                     ->get()
                     ->toArray();
+                $ingredients_delivered = true;
+                foreach($ingredients_order as $value) {
+                    if (!$value->delivered) {
+                        $ingredients_delivered = false;
+                        break;
+                    }
+                }
                 $response = Http::get(env('API_WAREHOUSE_ENDPOINT') . 'ingredients/get_by_order', [
                     'ingredients_order' => $ingredients_order
                 ]);
+                $order['ingredients_delivered'] = $ingredients_delivered;
                 $order['ingredients'] = $response->json();
             }
         }

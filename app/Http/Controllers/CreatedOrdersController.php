@@ -65,8 +65,6 @@ class CreatedOrdersController extends Controller
             'delivered' => true,
         ]);
 
-        $this->verifyOrderAndUpdateIfAllIngredientsAreDelivered($order_id, $ingredient_id);
-
         return response('Ingredient delivered', 200);
     }
 
@@ -109,28 +107,5 @@ class CreatedOrdersController extends Controller
             'receipt_id' => $receipt->id,
             'completed' => false,
         ]);
-    }
-
-    private function verifyOrderAndUpdateIfAllIngredientsAreDelivered($order_id, $ingredient_id): void
-    {
-        $ingredients_orders = DB::table('ingredient_order')
-            ->where('order_id', $order_id)
-            ->whereNot('ingredient_id', $ingredient_id)
-            ->get();
-
-        $all_ingredients_are_delivered = true;
-
-        foreach ($ingredients_orders as $ingredient) {
-            if (!$ingredient->delivered) {
-                $all_ingredients_are_delivered = false;
-                break;
-            }
-        }
-
-        if ($all_ingredients_are_delivered) {
-            DB::table('order_receipt')->where('order_id', $order_id)->update([
-                'completed' => true,
-            ]);
-        }
     }
 }

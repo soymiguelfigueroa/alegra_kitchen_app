@@ -34,6 +34,7 @@
                                         </ul>
                                     </th>
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                        @if($order['ingredients_delivered'])
                                         <form action="{{ route('processing_orders.complete', ['order_id' => $order['id']]) }}" method="POST">
                                             @csrf
                                             @method('PATCH')
@@ -41,6 +42,7 @@
                                                 {{ __('Complete')  }}
                                             </button>
                                         </form>
+                                        @endif
                                     </th>
                                 </tr>
                                 @endforeach
