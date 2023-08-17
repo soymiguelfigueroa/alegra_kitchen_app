@@ -28,6 +28,12 @@
                         {{ __('Processing orders') }}
                     </x-nav-link>
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('delivered_orders.index')" :active="request()->routeIs('delivered_orders.index')">
+                        {{ __('Delivered orders') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -81,6 +87,24 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('created_orders.index')" :active="request()->routeIs('created_orders.index')">
+                {{ __('Created orders') }}
+            </x-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('processing_orders.index')" :active="request()->routeIs('processing_orders.index')">
+                {{ __('Processing orders') }}
+            </x-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('delivered_orders.index')" :active="request()->routeIs('delivered_orders.index')">
+                {{ __('Delivered orders') }}
             </x-responsive-nav-link>
         </div>
 

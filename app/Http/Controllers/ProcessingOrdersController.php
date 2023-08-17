@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Receipt;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
 class ProcessingOrdersController extends Controller
@@ -14,21 +12,7 @@ class ProcessingOrdersController extends Controller
     {
         $response = Http::get(env('API_BENEFICIARY_ENDPOINT') . 'orders/pending');
 
-        $orders = $response->json()['data'];
-        foreach ($orders as &$order) {
-            $orders_receipts = DB::table('order_receipt')
-                ->where('completed', true)
-                ->where('order_id', $order['id'])
-                ->get()
-                ->toArray();
-            if (count($orders_receipts) <= 0) {
-                unset($order);
-            } else {
-                $receipt = Receipt::find($orders_receipts[0]->receipt_id);
-                $order['receipt'] = $receipt;
-            }
-        }
-        $orders = array_values($orders);
+        $orders = $this->getOrdersData($response);
 
         return view('orders.processing.index', compact('orders'));
     }

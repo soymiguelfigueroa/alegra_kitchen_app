@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DeliveredOrdersController;
 use App\Http\Controllers\ProcessingOrdersController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CreatedOrdersController;
@@ -34,6 +35,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/processing_orders', [ProcessingOrdersController::class, 'index'])->name('processing_orders.index');
     Route::patch('/processing_orders/complete/{order_id}', [ProcessingOrdersController::class, 'complete'])->name('processing_orders.complete');
+
+    Route::get('/delivered_orders', [DeliveredOrdersController::class, 'index'])->name('delivered_orders.index');
 });
 
 require __DIR__.'/auth.php';

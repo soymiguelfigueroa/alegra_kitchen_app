@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Created Orders') }}
+            {{ __('Delivered Orders') }}
         </h2>
     </x-slot>
 
@@ -13,12 +13,9 @@
                         <table class="w-full text-sm text-left text-gray-500">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                                 <tr>
-                                    <th class="px-6 py-3">{{ __('Id') }}</th>
-                                    <th class="px-6 py-3">{{ __('Date') }}</th>
+                                    <th class="px-6 py-3">{{ __('Order') }}</th>
+                                    <th class="px-6 py-3">{{ __('Receipt') }}</th>
                                     <th class="px-6 py-3">{{ __('Quantity') }}</th>
-                                    <th class="px-6 py-3">{{ __('User') }}</th>
-                                    <th class="px-6 py-3">{{ __('State') }}</th>
-                                    <th class="px-6 py-3">{{ __('Actions') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -28,25 +25,10 @@
                                         {{ $order['id'] }}
                                     </th>
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                        {{ $order['date'] }}
+                                        {{ $order['receipt']->name }}
                                     </th>
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                         {{ $order['quantity'] }}
-                                    </th>
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                        {{ $order['user']['email'] }}
-                                    </th>
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                        {{ $order['state']['name'] }}
-                                    </th>
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                        <form action="{{ route('created_orders.prepare', ['id' => $order['id']]) }}" method="POST">
-                                            @csrf
-                                            @method('PATCH')
-                                            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                                {{ __('Prepare')  }}
-                                            </button>
-                                        </form>
                                     </th>
                                 </tr>
                                 @endforeach
