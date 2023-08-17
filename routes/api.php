@@ -20,4 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/ingredients/undelivered', [CreatedOrdersController::class, 'getUndeliveredIngredients']);
+Route::get('/ingredients/delivered', [CreatedOrdersController::class, 'getDeliveredIngredients']);
 Route::patch('/ingredients/deliver', [CreatedOrdersController::class, 'deliverIngredients']);

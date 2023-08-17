@@ -48,6 +48,11 @@ class CreatedOrdersController extends Controller
         return DB::table('ingredient_order')->where('delivered', false)->orderBy('order_id')->get();
     }
 
+    public function getDeliveredIngredients(): Collection
+    {
+        return DB::table('ingredient_order')->where('delivered', true)->orderBy('order_id')->get();
+    }
+
     public function deliverIngredients(Request $request): Response
     {
         $ingredient_id = $request->ingredient_id;
