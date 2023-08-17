@@ -33,7 +33,7 @@ class CreatedOrdersController extends Controller
 
         $response = Http::patch(env('API_BENEFICIARY_ENDPOINT') . 'orders/update/state', [
             'order_id' => $order['id'],
-            'state_id' => 2,
+            'state_id' => 2, // Processing
         ]);
 
         if ($response->ok()) {
@@ -72,10 +72,10 @@ class CreatedOrdersController extends Controller
 
     private function getOrder($order_id)
     {
-        $response = Http::get(env('API_BENEFICIARY_ENDPOINT') . 'orders', [
+        $response = Http::get(env('API_BENEFICIARY_ENDPOINT') . 'orders/find', [
             'id' => $order_id
-        ]   );
-        return $response->json()['data'][0];
+        ]);
+        return $response->json();
     }
 
     private function selectReceiptRandomly()
