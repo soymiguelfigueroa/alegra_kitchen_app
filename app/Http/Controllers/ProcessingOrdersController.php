@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
 class ProcessingOrdersController extends Controller
@@ -23,6 +24,12 @@ class ProcessingOrdersController extends Controller
             'order_id' => $order_id,
             'state_id' => 3, // Completed
         ]);
+
+        $order_receipt = DB::table('order_receipt')
+            ->where('order_id', $order_id)
+            ->update([
+                'completed' => true,
+            ]);
 
         if ($response->ok()) {
             return redirect(route('processing_orders.index'))->with('success', __('Order completed'));
