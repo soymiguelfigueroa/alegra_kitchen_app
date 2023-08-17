@@ -4,6 +4,7 @@ use App\Http\Controllers\DeliveredOrdersController;
 use App\Http\Controllers\ProcessingOrdersController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CreatedOrdersController;
+use App\Http\Controllers\ReceiptsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,6 +38,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/processing_orders/complete/{order_id}', [ProcessingOrdersController::class, 'complete'])->name('processing_orders.complete');
 
     Route::get('/delivered_orders', [DeliveredOrdersController::class, 'index'])->name('delivered_orders.index');
+
+    Route::get('/receipts', [ReceiptsController::class, 'index'])->name('receipts.index');
+    Route::get('/receipts/{receipt}', [ReceiptsController::class, 'show'])->name('receipts.show');
 });
 
 require __DIR__.'/auth.php';
